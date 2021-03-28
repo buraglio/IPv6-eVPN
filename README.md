@@ -1,7 +1,7 @@
 # IPv6-eVPN
 
 ### Multi-Vendor IPv6 eVPN configuration lab
-Included here are the Test configurations for Mikrotik and Arista testing using Arista as backbone routers and Mikrotik as both CPE and an IPv6 DHCP-PD server as well as the Topology and Eve-NG Lab XML File. This lab should provide a foundation for eVPN isolation of CPE with IPv6 connectivity and should be suitable as a basis for building an ISP using such techniques.
+Included here are basic lab configurations for Mikrotik and Arista testing using Arista as backbone routers and Mikrotik as both CPE and an IPv6 DHCP-PD server as well as the Topology and Eve-NG Lab XML File. This lab should provide a foundation for eVPN isolation of CPE with IPv6 connectivity and should be suitable as a basis for building an ISP using such techniques.
 
 ### Files and such
 
