@@ -1,3 +1,0 @@
-Important Notes and Caveats:
-
-Routed interfaces are built as raw ports, not vlans. This is typically not best practice and is only for prototyping purposes.

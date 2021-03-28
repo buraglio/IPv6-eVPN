@@ -1,0 +1,30 @@
+# mar/28/2021 15:21:29 by RouterOS 6.47.1
+# software id =
+#
+#
+#
+/interface bridge
+add name=loopback.0
+/routing ospf instance
+set [ find default=yes ] comment="Default Backbone Area" distribute-default=if-installed-as-type-1 name=backbone redistribute-connected=as-type-1 redistribute-other-ospf=as-type-1 redistribute-static=as-type-1 router-id=10.255.255.1
+/routing ospf-v3 instance
+set [ find default=yes ] distribute-default=if-installed-as-type-1 metric-bgp=100 metric-other-ospf=100 redistribute-connected=as-type-1 router-id=10.255.255.1
+/ip address
+add address=10.129.129.1/24 interface=ether8 network=10.129.129.0
+add address=10.2.2.1/30 interface=ether1 network=10.2.2.0
+add address=10.255.255.1 interface=loopback.0 network=10.255.255.1
+/ip dhcp-client
+add disabled=no interface=ether1
+/ip ssh
+set strong-crypto=yes
+/ipv6 address
+add address=fdd6:8e83:ceb9:1::1/126 advertise=no interface=ether1
+add address=fdd6:8e83:ceb9::1/128 advertise=no interface=loopback.0
+/routing ospf interface
+add interface=ether1 network-type=point-to-point
+/routing ospf network
+add area=backbone network=10.2.2.0/30
+/routing ospf-v3 interface
+add area=backbone interface=ether1 network-type=point-to-point
+/system identity
+set name=ipv6-srv1

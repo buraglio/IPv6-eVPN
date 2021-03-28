@@ -29,6 +29,7 @@ interface Ethernet2
    no switchport
    ip address 10.2.2.2/30
    ipv6 enable
+   ipv6 address fdd6:8e83:ceb9:1::2/126
    ipv6 nd ra disabled
    ip ospf area 0.0.0.0
    ipv6 ospf 65217 area 0.0.0.0
@@ -62,6 +63,7 @@ interface Ethernet15
 interface Loopback0
    ip address 10.255.255.2/32
    ipv6 enable
+   ipv6 address fdd6:8e83:ceb9::2/128
    ip ospf area 0.0.0.0
    ipv6 ospf 65217 area 0.0.0.0
 !
