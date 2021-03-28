@@ -12,6 +12,7 @@ fdd6:8e83:ceb9::/48
     - IPv6-SRV1 - fdd6:8e83:ceb9::1/128
     - WAN1 - fdd6:8e83:ceb9::2/128
     - AGG1 - fdd6:8e83:ceb9::3/128
+
 #### PTPv6
   - fdd6:8e83:ceb9:1::/64 - Point-to-point links (as /126)
     - fdd6:8e83:ceb9:1::/126 - IPv6SRV/ether1 fdd6:8e83:ceb9:1::1/126 - fdd6:8e83:ceb9:1::2/126 WAN1/eth2
@@ -30,8 +31,7 @@ fdd6:8e83:ceb9::/48
   - WAN1 - 10.255.255.2
   - AGG1 - 10.255.255.3
 
-
-### PTPv4 10.2.2.0/24
+#### PTPv4 10.2.2.0/24
 - BLOCK 10.2.2.0/30 - IPv6SRV/ether1 10.2.2.1/30 - WAN1/eth2 10.2.2.2/30
 - BLOCK 10.2.2.4/30 - WAN1/eth1 10.2.2.5/30 - AGG1/eth1 10.2.2.6/30
 - BLOCK 10.2.2.8/30 - AGG1/eth3 10.2.2.9/30 - CPE2/ether1 10.2.2.10/30
