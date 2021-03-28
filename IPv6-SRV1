@@ -1,10 +1,14 @@
-# mar/28/2021 15:21:29 by RouterOS 6.47.1
+# mar/28/2021 16:41:44 by RouterOS 6.47.1
 # software id =
 #
 #
 #
 /interface bridge
 add name=loopback.0
+/ipv6 dhcp-server
+add address-pool=POP1-v6-pd-pool interface=ether1 name=POP1-v6-pd
+/ipv6 pool
+add comment="POP1 IPv6 prefix delegation pool" name=POP1-v6-pd-pool prefix=fdd6:8e83:ceb9:8000::/49 prefix-length=59
 /routing ospf instance
 set [ find default=yes ] comment="Default Backbone Area" distribute-default=if-installed-as-type-1 name=backbone redistribute-connected=as-type-1 redistribute-other-ospf=as-type-1 redistribute-static=as-type-1 router-id=10.255.255.1
 /routing ospf-v3 instance
