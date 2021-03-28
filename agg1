@@ -1,0 +1,85 @@
+! Command: show running-config
+! device: agg1 (vEOS, EOS-4.24.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname agg1
+!
+spanning-tree mode mstp
+!
+no aaa root
+!
+username admin role network-admin secret sha512 $6$xBJhXtZAW4XLJ/4k$i12jWk8tJFKmQFFo7D436XPxKChwpR/8Pk9fDATdd6uX5K9oIM.mjySVIRMcFeoB1lpARD3P6KrSN0Zbnhwv0.
+!
+interface Ethernet1
+   description "CORE: AGG1-WAN1"
+   no switchport
+   ip address 10.2.2.6/30
+   ipv6 enable
+   ipv6 nd ra disabled
+   ip ospf area 0.0.0.0
+   ipv6 ospf 65217 area 0.0.0.0
+!
+interface Ethernet2
+   ipv6 ospf 65217 area 0.0.0.0
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Ethernet12
+!
+interface Ethernet13
+!
+interface Ethernet14
+!
+interface Ethernet15
+!
+interface Loopback0
+   ip address 10.255.255.3/32
+   ipv6 enable
+   ip ospf area 0.0.0.0
+   ipv6 ospf 65217 area 0.0.0.0
+!
+interface Management0
+!
+interface Management1
+   ip address 10.129.129.3/24
+!
+ip routing
+!
+ipv6 unicast-routing
+!
+router ospf 65217
+   router-id 10.255.255.3
+   passive-interface default
+   no passive-interface Ethernet1
+   redistribute connected
+   max-lsa 12000
+!
+ipv6 router ospf 65217
+   router-id 10.255.255.3
+   passive-interface default
+   no passive-interface Ethernet1
+   passive-interface Ethernet2
+   area 0.0.0.0 default-cost 65217
+!
+end
