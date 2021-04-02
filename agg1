@@ -1,19 +1,20 @@
 ! Command: show running-config
 ! device: agg1 (vEOS, EOS-4.24.1.1F)
 !
-! boot system flash:/vEOS-lab.swi
+! boot system flash:/vEOS-lab.swi80 PCI2.10 PnP PMM 7FF90F50 7FEF0F50 D180
 !
 transceiver qsfp default-mode 4x10G
 !
-service routing protocols model ribd
+service routing protocols model multi-agent
 !
-hostname agg1
+hostname agg1ipxe.org) 00:0C.0 D280 PCI2.10 PnP PMM 7FF90F50 7FEF0F50 D280
 !
 spanning-tree mode mstp
 !
 no aaa root
 !
-username admin role network-admin secret sha512 $6$xBJhXtZAW4XLJ/4k$i12jWk8tJFKmQFFo7D436XPxKChwpR/8Pk9fDATdd6uX5K9oIM.mjySVIRMcFeoB1lpARD3P6KrSN0Zbnhwv0.
+username admin role network-admin secret sha512 $6$xBJhXtZAW4XLJ/4k$i12jWk8tJFKmQFFo7D436XPxKChwpR/8Pk9fDATdd6uX5K9oIM.mjySV
+IRMcFeoB1lpARD3P6KrSN0Zbnhwv0.
 !
 interface Ethernet1
    description "CORE: AGG1-WAN1"
@@ -53,9 +54,11 @@ interface Ethernet14
 !
 interface Ethernet15
 !
+!
 interface Loopback0
    ip address 10.255.255.3/32
    ipv6 enable
+   ipv6 address fdd6:8e83:ceb9::3/128
    ip ospf area 0.0.0.0
    ipv6 ospf 65217 area 0.0.0.0
 !
@@ -67,6 +70,20 @@ interface Management1
 ip routing
 !
 ipv6 unicast-routing
+!
+router bgp 65217
+   router-id 10.255.255.3
+   neighbor ibgp peer group
+   neighbor ibgp maximum-routes 12000
+   neighbor 10.255.255.1 peer group ibgp
+   neighbor 10.255.255.1 remote-as 65217
+   neighbor 10.255.255.2 peer group ibgp
+   neighbor 10.255.255.2 remote-as 65217
+   !
+   address-family ipv4
+      neighbor 10.255.255.1 activate
+      neighbor 10.255.255.2 activate
+      network 10.255.255.3/32
 !
 router ospf 65217
    router-id 10.255.255.3
@@ -80,6 +97,7 @@ ipv6 router ospf 65217
    passive-interface default
    no passive-interface Ethernet1
    passive-interface Ethernet2
+   redistribute connected
    area 0.0.0.0 default-cost 65217
 !
 end

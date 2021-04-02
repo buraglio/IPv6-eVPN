@@ -5,7 +5,7 @@
 !
 transceiver qsfp default-mode 4x10G
 !
-service routing protocols model ribd
+service routing protocols model multi-agent
 !
 hostname wan1
 !
@@ -76,6 +76,20 @@ ip routing
 !
 ipv6 unicast-routing
 !
+router bgp 65217
+   router-id 10.255.255.2
+   neighbor ibgp peer group
+   neighbor ibgp maximum-routes 12000
+   neighbor 10.255.255.1 peer group ibgp
+   neighbor 10.255.255.1 remote-as 65217
+   neighbor 10.255.255.3 remote-as 65217
+   neighbor 10.255.255.3 maximum-routes 12000
+   !
+   address-family ipv4
+      neighbor 10.255.255.1 activate
+      neighbor 10.255.255.3 activate
+      network 10.255.255.2/32
+!
 router ospf 65217
    router-id 10.255.255.2
    passive-interface default
@@ -87,6 +101,9 @@ router ospf 65217
 ipv6 router ospf 65217
    router-id 10.255.255.2
    passive-interface default
+   no passive-interface Ethernet1
+   no passive-interface Ethernet2
+   redistribute connected
    area 0.0.0.0 default-cost 65217
 !
 end

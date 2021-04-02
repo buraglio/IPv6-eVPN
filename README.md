@@ -11,7 +11,8 @@ Included here are basic lab configurations for Mikrotik and Arista testing using
 4. AGG1 - Arista Aggregation device (i.e. a regional or localish aggregation router and eVPN aggregator)
 5. WAN1 - Arista upstream router representing a WAN segment or set of segments
 
-
+### Usernames and Access
+Yes, the secrets are in the configurations. You can cut and paste the configurations into your lab directly. All devices use admin/admin as the username and password. 
 
 ### Diagrams and physical layout
 
